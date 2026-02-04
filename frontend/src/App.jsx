@@ -5,11 +5,13 @@ import NotificationsPage from "./pages/NotificationsPage";
 import CallPage from "./pages/CallPage";
 import ChatPage from "./pages/ChatPage";
 import OnBoardingPage from "./pages/OnBoardingPage";
+import FriendsPage from "./pages/FriendsPage";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes, Navigate } from "react-router-dom";
 import useAuthUser from "./hooks/useAuthUser";
 import Layout from "./components/Layout";
 import { useThemeStore } from "./store/useThemeStore";
+import PageLoader from "./components/PageLoader";
 
 
 function App() {
@@ -18,10 +20,15 @@ function App() {
   const { theme } = useThemeStore();
 
   const isAuthenticated = Boolean(authUser);
-  const isOnBoarded = authUser?.isOnBoarded;
+  const isOnBoarded = authUser?.isOnboarded;
+
+  console.log("DEBUG APP:", { 
+      authUser: authUser, 
+      isOnBoarded: authUser?.isOnboarded 
+  });
   if (isLoading) return <PageLoader />;
   return (
-    <div className=" h-screen " data-them={theme}>
+    <div className="h-screen" data-theme={theme}>
       <Routes>
         <Route path='/' element={isAuthenticated && isOnBoarded ?
           (<Layout showSidebar={true}>
@@ -41,6 +48,17 @@ function App() {
             isAuthenticated && isOnBoarded ? (
               <Layout showSidebar={true}>
                 <NotificationsPage />
+              </Layout>
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+            )
+          } />
+        <Route
+          path='/friends'
+          element={
+            isAuthenticated && isOnBoarded ? (
+              <Layout showSidebar={true}>
+                <FriendsPage />
               </Layout>
             ) : (
               <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
@@ -72,6 +90,7 @@ function App() {
           ))
           :
           (<Navigate to="/login" />)} />
+          <Route path='/test' element={<div>hello</div>} />
       </Routes>
       <Toaster />
     </div>

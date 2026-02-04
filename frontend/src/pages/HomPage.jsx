@@ -58,7 +58,7 @@ const HomePage = () => {
             Friend Requests
           </Link>
         </div>
-
+        {/* getuserfriend */}
         {loadingFriends ? (
           <div className="flex justify-center py-12">
             <span className="loading loading-spinner loading-lg" />
@@ -84,7 +84,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-
+          {/* get recommend */}
           {loadingUsers ? (
             <div className="flex justify-center py-12">
               <span className="loading loading-spinner loading-lg" />
