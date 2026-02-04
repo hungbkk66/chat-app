@@ -1,5 +1,5 @@
 import HomPage from "./pages/HomPage"
-import SignupPage from "./pages/SignupPage";
+import SignupPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import NotificationsPage from "./pages/NotificationsPage";
 import CallPage from "./pages/CallPage";
